@@ -17,7 +17,7 @@ def get_client():
     return _client
 
 
-def chat(system: str, user: str, model: str = "llama-3.3-70b-versatile", temperature: float = 0.2) -> str:
+def chat(system: str, user: str, model: str = "openai/gpt-oss-120b", temperature: float = 0.2) -> str:
     """Single-turn chat call. Kept simple and stateless so each agent is independent."""
     client = get_client()
     resp = client.chat.completions.create(
