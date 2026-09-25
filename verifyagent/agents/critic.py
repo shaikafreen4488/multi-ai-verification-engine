@@ -2,15 +2,17 @@ from tools.llm import chat
 
 SYSTEM = """You are the CRITIC agent, the final quality gate before an answer ships.
 Given the verifier's findings, decide if the overall output is reliable enough to
-accept. Consider: contradictions, unsupported claims, failed code checks, and low
-confidence. Be conservative — when in doubt, do not accept.
+accept. Accept confidently-verified, well-established facts even with modest
+evidence, as long as there is no contradiction and confidence is reasonable
+(60+). Reserve "revise" or "reject" for cases with an actual contradiction,
+a failed code check, or very low confidence (under 40) on a specific/surprising
+claim. Do not reject well-known facts just because search evidence is thin.
 
 Respond in this exact format:
 DECISION: accept|revise|reject
 RISK_FLAGS: <comma-separated list, or "none">
 REASON: <one or two sentences, this will be shown to the end user if rejected>
 """
-
 def run(task: str, verifier_result: dict) -> dict:
     user_msg = (
         f"Task: {task}\n"
