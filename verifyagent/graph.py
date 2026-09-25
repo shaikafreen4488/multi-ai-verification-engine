@@ -58,20 +58,20 @@ def node_critique(state: GraphState) -> GraphState:
     c = critic.run(state["task"], state["verification"])
     state["critique"] = c
     state["trace"].append({"agent": "Critic", "output": c})
+
+    decision = c["decision"]
+    if decision == "accept":
+        state["final_status"] = "accepted"
+    elif decision == "reject" or state["revisions"] >= MAX_REVISIONS:
+        state["final_status"] = "rejected"
+    else:
+        state["revisions"] += 1
+        state["final_status"] = None
     return state
 
 
 def route_after_critique(state: GraphState) -> str:
-    decision = state["critique"]["decision"]
-    if decision == "accept":
-        state["final_status"] = "accepted"
-        return "end"
-    if decision == "reject" or state["revisions"] >= MAX_REVISIONS:
-        state["final_status"] = "rejected"
-        return "end"
-    # revise: loop back to research/coder with feedback, bump counter
-    state["revisions"] += 1
-    return "revise"
+    return "end" if state["final_status"] is not None else "revise"
 
 
 def build_graph():
