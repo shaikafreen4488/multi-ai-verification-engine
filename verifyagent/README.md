@@ -9,11 +9,14 @@ instead of trusting its first draft.
 
 ## Live Deployment
 
-🔗 **Deployment URL:** _[fill in after deploying — see Deployment section]_
+🔗 **Deployment URL:** https://multi-ai-verification-engine-k4tjfifwqcd6mu7u2lcs9p.streamlit.app/
 
 ## Team
 
-- _[Name(s) / roll numbers / emails — fill in]_
+Shaik Afreen-25102A040060 -CSE
+Katam Chaitanya -25102A010711 -AIML
+Mokshitha Lekkala -25102A040002 -CSE
+Bollishetti Surekha -25102A040061 -CSE
 
 ## Architecture
 
