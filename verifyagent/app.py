@@ -1,6 +1,9 @@
 import json
+import os
 import streamlit as st
 from graph import run_pipeline
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(page_title="Verify Engine — Multi-Agent Reasoning & Verification", layout="wide")
 
@@ -8,7 +11,7 @@ st.title("🔎 Multi-Agent AI Reasoning & Verification Engine")
 st.caption("Generation and verification are separated: independent agents fact-check, "
            "code-check, and contradiction-check every claim before it's accepted.")
 
-with open("eval_set.json") as f:
+with open(os.path.join(BASE_DIR, "eval_set.json")) as f:
     eval_set = json.load(f)
 
 col1, col2 = st.columns([3, 1])
